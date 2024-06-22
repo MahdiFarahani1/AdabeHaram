@@ -73,9 +73,9 @@ class DBhelper {
     return db.query('articles', where: 'groupId = ?', whereArgs: [id]);
   }
 
-  Future<List<Map<String, dynamic>>> getRealArticle(int id) async {
+  Future<List<Map<String, dynamic>>> getPrayers(int id) async {
     Database db = await initDb();
-    return db.query('articles', where: 'id = ?', whereArgs: [id]);
+    return db.query('duas_ziarat', where: 'groupId = ?', whereArgs: [id]);
   }
 
   Future<List<Map<String, dynamic>>> getSearch(String query) async {

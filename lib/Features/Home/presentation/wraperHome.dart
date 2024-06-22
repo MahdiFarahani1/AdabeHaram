@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
 class WraperHome extends StatefulWidget {
+  static const String rn = "/wraperHome";
   final ZoomDrawerController drawerController;
-  final dynamic routeName;
+  final Widget mainScreen;
   const WraperHome(
-      {super.key, required this.drawerController, required this.routeName});
+      {super.key, required this.drawerController, required this.mainScreen});
 
   @override
   State<WraperHome> createState() => _WraperHomeState();
@@ -23,13 +24,11 @@ class _WraperHomeState extends State<WraperHome> {
         style: DrawerStyle.defaultStyle,
         angle: 0,
         drawerShadowsBackgroundColor: Theme.of(context).splashColor,
-        showShadow: true,
-        menuBackgroundColor: Colors.amberAccent.shade100,
-        shadowLayer1Color: Colors.grey.shade400.withAlpha(100),
-        shadowLayer2Color: Colors.grey.shade500.withAlpha(100),
+        showShadow: false,
+        menuBackgroundColor: Theme.of(context).colorScheme.tertiary,
         isRtl: true,
         controller: widget.drawerController,
         menuScreen: CustomDrawer(),
-        mainScreen: widget.routeName);
+        mainScreen: widget.mainScreen);
   }
 }

@@ -1,4 +1,5 @@
-import 'package:adabeharam/Core/widget/gradient.dart';
+import 'package:adabeharam/Core/utils/esay_size.dart';
+import 'package:adabeharam/Core/utils/gr.dart';
 import 'package:adabeharam/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
@@ -10,12 +11,11 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amberAccent.shade100,
       body: Container(
-        width: double.infinity,
+        width: EsaySize.width(context) * 0.6,
         height: double.infinity,
         decoration: BoxDecoration(
-            gradient: CommonGradient.gr(),
+            gradient: CustomGradient.gr(context),
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(16), bottomLeft: Radius.circular(16))),
         child: Center(
@@ -26,7 +26,7 @@ class CustomDrawer extends StatelessWidget {
               fit: BoxFit.cover,
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: ElevatedButton(
                   onPressed: () {},
                   child: const Row(
@@ -40,7 +40,7 @@ class CustomDrawer extends StatelessWidget {
                   )),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: ElevatedButton(
                   onPressed: () {},
                   child: const Row(
@@ -54,7 +54,7 @@ class CustomDrawer extends StatelessWidget {
                   )),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: ElevatedButton(
                   onPressed: () {},
                   child: const Row(
@@ -68,7 +68,7 @@ class CustomDrawer extends StatelessWidget {
                   )),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: ElevatedButton(
                   onPressed: () {},
                   child: const Row(
@@ -81,7 +81,7 @@ class CustomDrawer extends StatelessWidget {
                     ],
                   )),
             ),
-            Text("Drawer"),
+            const Text("Drawer"),
           ],
         )),
       ),

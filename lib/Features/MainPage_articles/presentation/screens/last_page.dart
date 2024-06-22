@@ -5,16 +5,18 @@ import 'package:adabeharam/Features/Content/presentation/content.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MainPage extends StatelessWidget {
+class LastPage extends StatelessWidget {
+  static const String rn = "/mainPage";
+
   final int id;
-  const MainPage({super.key, required this.id});
+  const LastPage({super.key, required this.id});
 
   @override
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.ltr,
       child: Scaffold(
-        appBar: CustomAppbar.appbar(),
+        appBar: CustomAppbar.appbar(context),
         body: SingleChildScrollView(
           child: FutureBuilder<List<Map<String, dynamic>>>(
             future: DBhelper().getArticle(id),
@@ -46,9 +48,8 @@ class MainPage extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(4))),
                           onPressed: () async {
-                            Get.to(ContentPage(
-                              id: id,
-                            ));
+                            Get.toNamed('${ContentPage.rn}?id=$id');
+
                             // var db = await DBhelper()
                             //     .getArticlesAndGroups(data[index]["id"]);
                             // if (db.any(
