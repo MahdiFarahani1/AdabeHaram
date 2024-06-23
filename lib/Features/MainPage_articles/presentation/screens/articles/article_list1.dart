@@ -1,6 +1,7 @@
 import 'package:adabeharam/Core/widget/appbar.dart';
 import 'package:adabeharam/Features/MainPage_articles/presentation/screens/articles/article_list2.dart';
 import 'package:adabeharam/Features/MainPage_articles/repository/list_common.dart';
+import 'package:adabeharam/main.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,7 +19,7 @@ class ArticleList1 extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.ltr,
       child: Scaffold(
-        appBar: CustomAppbar.appbar(context),
+        appBar: CustomAppbar.appbar(context, commonController),
         body: FutureCommon.future(
           context: context,
           id: id,

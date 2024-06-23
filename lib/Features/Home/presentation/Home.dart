@@ -1,5 +1,6 @@
 import 'package:adabeharam/Core/database/db_helper.dart';
 import 'package:adabeharam/Core/utils/gr.dart';
+import 'package:adabeharam/Core/widget/card_icon.dart';
 import 'package:adabeharam/Features/MainPage_articles/presentation/screens/articles/article_list2.dart';
 import 'package:adabeharam/Features/MainPage_articles/presentation/screens/last_page.dart';
 import 'package:adabeharam/Features/MainPage_articles/repository/title_appbar.dart';
@@ -7,6 +8,7 @@ import 'package:adabeharam/Features/Prayers/presentation/prayer_id1.dart';
 import 'package:adabeharam/Features/Prayers/presentation/prayer_id2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
@@ -29,39 +31,59 @@ class Home extends StatelessWidget {
     // Define the onPress functions for each category
     final List<VoidCallback> categoryOnpressList = [
       () {
+        NameCat.nameCategory = categotyList[0];
         Get.toNamed('${PrayerId1.rn}?id=1');
       },
       () {
+        NameCat.nameCategory = categotyList[1];
         Get.toNamed('${PrayerId2.rn}?id=2');
       },
       () {
-        print("Category 3 pressed");
+        NameCat.nameCategory = categotyList[2];
       },
       () {
-        print("Category 4 pressed");
+        NameCat.nameCategory = categotyList[3];
       },
       () {
-        print("Category 5 pressed");
+        NameCat.nameCategory = categotyList[4];
       },
     ];
 
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          leading: CardIcon.widget(
+            size: 20,
+            iconData: FontAwesomeIcons.magnifyingGlass,
+            onPress: () {},
+          ),
+          title: const Text(
+            "آداب حرم",
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+                fontSize: 20,
+                decoration: TextDecoration.underline,
+                decorationColor: Colors.white,
+                decorationThickness: 1.8,
+                decorationStyle: TextDecorationStyle.dashed),
+          ),
+          actions: [
+            CardIcon.widget(
+              iconData: Icons.menu,
+              onPress: () {
+                controller.toggle!.call();
+              },
+            ),
+          ],
+        ),
         body: Container(
           decoration: BoxDecoration(gradient: CustomGradient.gr(context)),
           child: Align(
             alignment: Alignment.bottomCenter,
             child: Column(
               children: [
-                Align(
-                    alignment: Alignment.topRight,
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 12, top: 8),
-                      child:
-                          const Text("یکی را انتخاب کنید ...").animate().fade(
-                                duration: const Duration(milliseconds: 1000),
-                              ),
-                    )),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
@@ -173,12 +195,12 @@ class Home extends StatelessWidget {
                               }
                               if (index % 2 == 0) {
                                 return button.animate().fade().moveX(
-                                    begin: 500,
+                                    begin: -500,
                                     duration:
                                         const Duration(milliseconds: 500));
                               } else {
                                 return button.animate().fade().moveX(
-                                    begin: -500,
+                                    begin: 500,
                                     duration:
                                         const Duration(milliseconds: 500));
                               }

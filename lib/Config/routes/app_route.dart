@@ -89,10 +89,7 @@ List<GetPage<dynamic>>? pages(ZoomDrawerController controller) {
     ),
     GetPage(
       name: ContentPage.rn,
-      page: () => WraperHome(
-        drawerController: controller,
-        mainScreen: ContentPage(id: int.parse(Get.parameters['id']!)),
-      ),
+      page: () => ContentPage(id: int.parse(Get.parameters['id']!)),
       transition: Transition.upToDown,
     ),
     GetPage(

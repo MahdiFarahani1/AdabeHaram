@@ -1,5 +1,7 @@
 import 'package:adabeharam/Core/database/db_helper.dart';
+import 'package:adabeharam/Core/widget/appbar.dart';
 import 'package:adabeharam/Features/MainPage_articles/repository/listview.dart';
+import 'package:adabeharam/main.dart';
 import 'package:flutter/material.dart';
 
 class PrayerId1 extends StatelessWidget {
@@ -11,7 +13,10 @@ class PrayerId1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: CustomAppbar.appbar(
+        context,
+        commonController,
+      ),
       body: SingleChildScrollView(
         child: FutureBuilder<List<Map<String, dynamic>>>(
           future: DBhelper().getPrayers(id),

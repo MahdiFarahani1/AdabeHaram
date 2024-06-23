@@ -22,24 +22,11 @@ class $AssetsDatabaseGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/backIcon.png
-  AssetGenImage get backIcon =>
-      const AssetGenImage('assets/images/backIcon.png');
-
-  /// File path: assets/images/bg.jpg
-  AssetGenImage get bg => const AssetGenImage('assets/images/bg.jpg');
-
   /// File path: assets/images/div.png
   AssetGenImage get div => const AssetGenImage('assets/images/div.png');
 
-  /// File path: assets/images/home.png
-  AssetGenImage get home => const AssetGenImage('assets/images/home.png');
-
-  /// File path: assets/images/menu.jpg
-  AssetGenImage get menu => const AssetGenImage('assets/images/menu.jpg');
-
   /// List of all assets
-  List<AssetGenImage> get values => [backIcon, bg, div, home, menu];
+  List<AssetGenImage> get values => [div];
 }
 
 class Assets {

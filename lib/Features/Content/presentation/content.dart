@@ -1,7 +1,12 @@
 import 'package:adabeharam/Core/database/db_helper.dart';
 import 'package:adabeharam/Core/utils/esay_size.dart';
-import 'package:adabeharam/gen/assets.gen.dart';
+import 'package:adabeharam/Core/utils/gr.dart';
+import 'package:adabeharam/Core/widget/appbar.dart';
+import 'package:adabeharam/main.dart';
+import 'package:draggable_fab/draggable_fab.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class ContentPage extends StatelessWidget {
@@ -17,14 +22,12 @@ class ContentPage extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.ltr,
       child: Scaffold(
-        appBar: AppBar(
-          actions: [
-            GestureDetector(
-              onTap: () {},
-              child: Assets.images.home.image(),
-            )
-          ],
+        floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+        floatingActionButton: DraggableFab(
+          child: floatingBtn(context),
         ),
+        backgroundColor: Colors.white,
+        appBar: CustomAppbar.appbar(context, commonController, isContent: true),
         body: FutureBuilder<List<Map<String, dynamic>>>(
           future: DBhelper().getContent(id),
           builder: (context, snapshot) {
@@ -38,14 +41,11 @@ class ContentPage extends StatelessWidget {
               final data = snapshot.data!;
               return SizedBox(
                 width: EsaySize.width(context),
-                height: EsaySize.height(context) * 0.9,
-                child: Column(children: [
-                  Text(data[0]["title"]),
-                  Expanded(
-                    child: WebViewWidget(
-                      controller: controllerWeb
-                        ..loadHtmlString(
-                          '''
+                height: EsaySize.height(context),
+                child: WebViewWidget(
+                  controller: controllerWeb
+                    ..loadHtmlString(
+                      '''
                                   <html>
                                     <head>
                                       <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -60,30 +60,86 @@ class ContentPage extends StatelessWidget {
                                     <body dir ="rtl">
                                    
                                       ${data[0]["_text"]}
-      
-                                      <script>
-                                      
-                                      var images = document.getElementsByTagName('img');
-      for (var i = 0; i < images.length; ++i) {
-        var img = images[i];
-        var a = document.createElement('a');
-        a.href = img.src;
-        img.parentNode.replaceChild(a, img);
-        a.appendChild(img);
-      }
-                                      </script>
-                                    </body>
-                                  </html>
-                                ''',
-                        ),
+                      
+                     
+                                </body>
+                              </html>
+                            ''',
                     ),
-                  )
-                ]),
+                ),
               );
             }
           },
         ),
       ),
+    );
+  }
+
+  SpeedDial floatingBtn(BuildContext context) {
+    return SpeedDial(
+      direction: SpeedDialDirection.up,
+      icon: Icons.menu,
+      activeIcon: Icons.close,
+      gradient: CustomGradient.gr(context),
+      foregroundColor: Colors.white,
+      activeBackgroundColor: Colors.red,
+      activeForegroundColor: Colors.white,
+      closeDialOnPop: true,
+      visible: true,
+      // gradient: CustomGr.gradient(context),
+      spacing: 0,
+      spaceBetweenChildren: 0,
+      gradientBoxShape: BoxShape.circle,
+      curve: Curves.bounceIn,
+      children: [
+        SpeedDialChild(
+          backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+          child: Transform.scale(
+              scale: 1,
+              child: const Icon(
+                Icons.home_outlined,
+              )),
+          labelBackgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+          label: 'خانه',
+          labelStyle: const TextStyle(fontSize: 18.0),
+          onTap: () {},
+        ),
+        SpeedDialChild(
+          backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+          child: Transform.scale(
+              scale: 1,
+              child: const Icon(
+                FontAwesomeIcons.star,
+                size: 20,
+              )),
+          labelBackgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+          label: 'ذخیره',
+          labelStyle: const TextStyle(fontSize: 18.0),
+          onTap: () {},
+        ),
+        SpeedDialChild(
+          backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+          child: const Icon(
+            Icons.settings_outlined,
+          ),
+          labelBackgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+          label: 'تنظیمات',
+          labelStyle: const TextStyle(
+            fontSize: 18.0,
+          ),
+          onTap: () {},
+        ),
+        SpeedDialChild(
+          backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+          child: const Icon(
+            Icons.share_outlined,
+          ),
+          label: 'اشتراک گذاری',
+          labelBackgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+          labelStyle: const TextStyle(fontSize: 18.0),
+          onTap: () {},
+        ),
+      ],
     );
   }
 }

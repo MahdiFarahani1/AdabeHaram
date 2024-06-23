@@ -2,34 +2,24 @@ import 'package:adabeharam/Config/routes/app_route.dart';
 import 'package:adabeharam/Features/Home/presentation/wraperHome.dart';
 import 'package:adabeharam/gen/fonts.gen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
+final ZoomDrawerController commonController = ZoomDrawerController();
+
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
-  final ZoomDrawerController controller = ZoomDrawerController();
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('ar'),
-        Locale('en'),
-      ],
-      locale: const Locale('ar'),
       initialRoute: WraperHome.rn,
-      getPages: pages(controller),
+      getPages: pages(commonController),
       theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xFF81C784),
         useMaterial3: true,
