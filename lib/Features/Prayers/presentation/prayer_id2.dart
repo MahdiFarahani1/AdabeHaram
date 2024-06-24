@@ -1,8 +1,10 @@
 import 'package:adabeharam/Core/database/db_helper.dart';
 import 'package:adabeharam/Core/widget/appbar.dart';
-import 'package:adabeharam/Features/MainPage_articles/repository/listview.dart';
+import 'package:adabeharam/Features/Content/presentation/content.dart';
+import 'package:adabeharam/Features/Prayers/repository/prayer_listview.dart';
 import 'package:adabeharam/main.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PrayerId2 extends StatelessWidget {
   static const String rn = "/Prayer2";
@@ -30,20 +32,17 @@ class PrayerId2 extends StatelessWidget {
               return const Center(child: Text('No Data Found'));
             } else {
               final data = snapshot.data!;
-              return CommonListView(
+              return PrayerListView(
                 data: data,
                 onPress: (index) async {
-                  // var db = await DBhelper()
-                  //     .getArticlesAndGroups(data[index]["id"]);
-                  // if (db.any((element) => element.containsKey("_text"))) {
-                  //   Get.to(MainPage(
-                  //     id: data[index]["id"],
-                  //   ));
-                  // } else {
-                  //   Get.to(() => ArticleList3(
-                  //         id: data[index]["id"],
-                  //       ));
-                  // }
+                  Get.toNamed(
+                    ContentPage.rn,
+                    parameters: {
+                      'id': data[index]['id'].toString(),
+                      'isPrayerPage': 'true',
+                      'url': data[index]['file_name']
+                    },
+                  );
                 },
               );
             }

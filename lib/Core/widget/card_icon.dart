@@ -5,7 +5,7 @@ class CardIcon {
       {required IconData iconData,
       required VoidCallback onPress,
       double? size}) {
-    return InkWell(
+    return GestureDetector(
       onTap: () {
         onPress();
       },

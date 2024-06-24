@@ -2,34 +2,68 @@ import 'package:adabeharam/Core/database/db_helper.dart';
 import 'package:adabeharam/Core/utils/esay_size.dart';
 import 'package:adabeharam/Core/utils/gr.dart';
 import 'package:adabeharam/Core/widget/appbar.dart';
+import 'package:adabeharam/Core/widget/card_icon.dart';
+import 'package:adabeharam/Features/Content/presentation/getx/controller_nav_bar.dart';
+import 'package:adabeharam/Features/Content/repository/format_duration.dart';
 import 'package:adabeharam/main.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:draggable_fab/draggable_fab.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class ContentPage extends StatelessWidget {
+class ContentPage extends StatefulWidget {
   static const String rn = "/content";
-
   final int id;
+
+  const ContentPage({super.key, required this.id});
+
+  @override
+  State<ContentPage> createState() => _ContentPageState();
+}
+
+class _ContentPageState extends State<ContentPage> {
+  final AudioPlayer audioPlayer = AudioPlayer();
+  var navController = Get.put(NavBarController());
+
+  @override
+  void initState() {
+    navController.initState(audioPlayer);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    audioPlayer.dispose();
+    super.dispose();
+  }
+
   final controllerWeb = WebViewController()
     ..setJavaScriptMode(JavaScriptMode.unrestricted);
-  ContentPage({super.key, required this.id});
 
   @override
   Widget build(BuildContext context) {
+    final bool isPrayerPage = Get.parameters['isPrayerPage'] == 'true';
+    final String urlAudio = Get.parameters['url'] ?? "";
     return Directionality(
       textDirection: TextDirection.ltr,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-        floatingActionButton: DraggableFab(
-          child: floatingBtn(context),
-        ),
+        floatingActionButton: isPrayerPage
+            ? const SizedBox()
+            : DraggableFab(
+                child: floatingBtn(context),
+              ),
         backgroundColor: Colors.white,
         appBar: CustomAppbar.appbar(context, commonController, isContent: true),
         body: FutureBuilder<List<Map<String, dynamic>>>(
-          future: DBhelper().getContent(id),
+          future: isPrayerPage
+              ? DBhelper().getPrayersContent(widget.id)
+              : DBhelper().getContent(widget.id),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
@@ -71,6 +105,113 @@ class ContentPage extends StatelessWidget {
             }
           },
         ),
+        bottomNavigationBar: isPrayerPage
+            ? GetBuilder<NavBarController>(
+                initState: (_) {},
+                builder: (_) {
+                  return Stack(
+                    clipBehavior: Clip.none,
+                    alignment: Alignment.topCenter,
+                    children: [
+                      AnimatedContainer(
+                        duration: const Duration(milliseconds: 850),
+                        width: EsaySize.width(context),
+                        height: navController.height,
+                        decoration: BoxDecoration(
+                          gradient: CustomGradient.gr(context),
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(24),
+                            topRight: Radius.circular(24),
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 25),
+                              child: Align(
+                                child: SizedBox(
+                                  width: EsaySize.width(context) * 0.75,
+                                  child: SliderTheme(
+                                    data: SliderThemeData(
+                                        trackHeight: 3,
+                                        thumbColor:
+                                            Colors.black.withOpacity(0.7),
+                                        activeTrackColor:
+                                            Colors.black.withOpacity(0.7)),
+                                    child: Slider(
+                                      min: 0,
+                                      max: navController.duration.inSeconds
+                                          .toDouble(),
+                                      value: navController.position.inSeconds
+                                          .toDouble(),
+                                      onChanged: (value) async {
+                                        navController.changeSliderValue(
+                                            audioPlayer, value);
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 22,
+                                  ),
+                                  child: Text(
+                                    FormatDuration.formatDuration(
+                                        navController.duration -
+                                            navController.position),
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    right: 22,
+                                  ),
+                                  child: Text(
+                                    FormatDuration.formatDuration(
+                                        navController.duration),
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            EsaySize.gap(25),
+                            GestureDetector(
+                              onTap: () {
+                                navController.changeStateAudio(
+                                    audioPlayer, urlAudio);
+                              },
+                              child: Card(
+                                shape: const CircleBorder(),
+                                child: Icon(
+                                  navController.iconDataPlay,
+                                  size: 60,
+                                  color: Colors.black.withOpacity(0.9),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Positioned(
+                          top: -30,
+                          child: CardIcon.widget(
+                            iconData: navController.iconDataArrow,
+                            onPress: () {
+                              navController
+                                  .openNavbar(EsaySize.height(context) * 0.35);
+                            },
+                          )),
+                    ],
+                  );
+                },
+              )
+            : const SizedBox(),
       ),
     );
   }

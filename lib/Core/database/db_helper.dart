@@ -78,6 +78,11 @@ class DBhelper {
     return db.query('duas_ziarat', where: 'groupId = ?', whereArgs: [id]);
   }
 
+  Future<List<Map<String, dynamic>>> getPrayersContent(int id) async {
+    Database db = await initDb();
+    return db.query('duas_ziarat', where: 'id = ?', whereArgs: [id]);
+  }
+
   Future<List<Map<String, dynamic>>> getSearch(String query) async {
     Database db = await initDb();
     return db.rawQuery("SELECT * FROM articles WHERE _text LIKE '%$query%'");

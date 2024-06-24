@@ -1,5 +1,6 @@
 import 'package:adabeharam/Features/Content/presentation/content.dart';
 import 'package:adabeharam/Features/Home/presentation/Home.dart';
+import 'package:adabeharam/Features/Home/presentation/image_viewer.dart';
 import 'package:adabeharam/Features/Home/presentation/wraperHome.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
@@ -108,5 +109,10 @@ List<GetPage<dynamic>>? pages(ZoomDrawerController controller) {
       ),
       transition: Transition.upToDown,
     ),
+    GetPage(
+      name: ImageViewer.rn,
+      page: () => const ImageViewer(),
+      transition: Transition.upToDown,
+    )
   ];
 }

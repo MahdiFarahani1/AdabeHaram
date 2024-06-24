@@ -21,16 +21,19 @@ class CustomAppbar {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CardIcon.widget(
-                size: 20,
-                iconData: FontAwesomeIcons.anglesLeft,
-                onPress: () {
-                  if (Get.previousRoute.isNotEmpty) {
-                    Get.back();
-                  } else {
-                    Get.toNamed(Home.rn);
-                  }
-                },
+              Padding(
+                padding: const EdgeInsets.only(left: 4),
+                child: CardIcon.widget(
+                  size: 20,
+                  iconData: FontAwesomeIcons.anglesLeft,
+                  onPress: () {
+                    if (Get.previousRoute.isNotEmpty) {
+                      Get.back();
+                    } else {
+                      Get.toNamed(Home.rn);
+                    }
+                  },
+                ),
               ),
               NameCat.nameCategory.length < 35
                   ? Text(
@@ -50,17 +53,21 @@ class CustomAppbar {
                       blankSpace: 30,
                       velocity: 50,
                     )),
-              CardIcon.widget(
-                iconData:
-                    (isContent ?? false) ? FontAwesomeIcons.house : Icons.menu,
-                size: 24,
-                onPress: () {
-                  if ((isContent ?? false) == false) {
-                    controller.toggle?.call();
-                  } else {
-                    Get.toNamed(Home.rn);
-                  }
-                },
+              Padding(
+                padding: const EdgeInsets.only(right: 4),
+                child: CardIcon.widget(
+                  iconData: (isContent ?? false)
+                      ? FontAwesomeIcons.house
+                      : Icons.menu,
+                  size: 24,
+                  onPress: () {
+                    if ((isContent ?? false) == false) {
+                      controller.toggle?.call();
+                    } else {
+                      Get.toNamed(Home.rn);
+                    }
+                  },
+                ),
               ),
             ],
           ),

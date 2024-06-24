@@ -8,7 +8,7 @@ class CostumLoading {
         return const DecoratedBox(
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Colors.blueAccent,
+            color: Colors.white,
           ),
         );
       },
@@ -21,7 +21,7 @@ class CostumLoading {
       itemBuilder: (context, index) {
         return const DecoratedBox(
           decoration: BoxDecoration(
-            color: Colors.blueAccent,
+            color: Colors.white,
           ),
         );
       },
@@ -34,7 +34,7 @@ class CostumLoading {
       itemBuilder: (context, index) {
         return const DecoratedBox(
           decoration: BoxDecoration(
-            color: Colors.blueAccent,
+            color: Colors.white,
           ),
         );
       },

@@ -1,6 +1,7 @@
 import 'package:adabeharam/Core/database/db_helper.dart';
 import 'package:adabeharam/Core/utils/gr.dart';
 import 'package:adabeharam/Core/widget/card_icon.dart';
+import 'package:adabeharam/Features/Home/presentation/image_viewer.dart';
 import 'package:adabeharam/Features/MainPage_articles/presentation/screens/articles/article_list2.dart';
 import 'package:adabeharam/Features/MainPage_articles/presentation/screens/last_page.dart';
 import 'package:adabeharam/Features/MainPage_articles/repository/title_appbar.dart';
@@ -40,9 +41,11 @@ class Home extends StatelessWidget {
       },
       () {
         NameCat.nameCategory = categotyList[2];
+        Get.toNamed(ImageViewer.rn, parameters: {'isKharet': 'true'});
       },
       () {
         NameCat.nameCategory = categotyList[3];
+        Get.toNamed(ImageViewer.rn, parameters: {'isKharet': 'false'});
       },
       () {
         NameCat.nameCategory = categotyList[4];
@@ -52,11 +55,15 @@ class Home extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          leadingWidth: 64,
           centerTitle: true,
-          leading: CardIcon.widget(
-            size: 20,
-            iconData: FontAwesomeIcons.magnifyingGlass,
-            onPress: () {},
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 4),
+            child: CardIcon.widget(
+              size: 20,
+              iconData: FontAwesomeIcons.magnifyingGlass,
+              onPress: () {},
+            ),
           ),
           title: const Text(
             "آداب حرم",
@@ -70,11 +77,14 @@ class Home extends StatelessWidget {
                 decorationStyle: TextDecorationStyle.dashed),
           ),
           actions: [
-            CardIcon.widget(
-              iconData: Icons.menu,
-              onPress: () {
-                controller.toggle!.call();
-              },
+            Padding(
+              padding: const EdgeInsets.only(right: 4),
+              child: CardIcon.widget(
+                iconData: Icons.menu,
+                onPress: () {
+                  controller.toggle!.call();
+                },
+              ),
             ),
           ],
         ),
