@@ -5,14 +5,17 @@ import 'package:adabeharam/Core/widget/appbar.dart';
 import 'package:adabeharam/Core/widget/card_icon.dart';
 import 'package:adabeharam/Features/Content/presentation/getx/controller_nav_bar.dart';
 import 'package:adabeharam/Features/Content/repository/format_duration.dart';
+import 'package:adabeharam/Features/Favorite/presentation/getx/Favorite_controller.dart';
 import 'package:adabeharam/main.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:draggable_fab/draggable_fab.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/route_manager.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class ContentPage extends StatefulWidget {
@@ -27,10 +30,15 @@ class ContentPage extends StatefulWidget {
 
 class _ContentPageState extends State<ContentPage> {
   final AudioPlayer audioPlayer = AudioPlayer();
+  bool iconFavorite = false;
+
+  late List<Map<String, dynamic>> data;
   var navController = Get.put(NavBarController());
+  final box = GetStorage();
 
   @override
   void initState() {
+    iconFavorite = box.read("Favorite${widget.id}") ?? false;
     navController.initState(audioPlayer);
     super.initState();
   }
@@ -46,7 +54,9 @@ class _ContentPageState extends State<ContentPage> {
 
   @override
   Widget build(BuildContext context) {
-    final bool isPrayerPage = Get.parameters['isPrayerPage'] == 'true';
+    bool isPrayerPage = Get.parameters['isPrayerPage'] == 'true';
+    bool isSavePage = Get.parameters['isSavePage'] == 'true';
+
     final String urlAudio = Get.parameters['url'] ?? "";
     return Directionality(
       textDirection: TextDirection.ltr,
@@ -63,7 +73,9 @@ class _ContentPageState extends State<ContentPage> {
         body: FutureBuilder<List<Map<String, dynamic>>>(
           future: isPrayerPage
               ? DBhelper().getPrayersContent(widget.id)
-              : DBhelper().getContent(widget.id),
+              : isSavePage
+                  ? DBhelper().getContentAllsave(widget.id)
+                  : DBhelper().getContent(widget.id),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
@@ -72,7 +84,7 @@ class _ContentPageState extends State<ContentPage> {
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
               return const Center(child: Text('No Data Found'));
             } else {
-              final data = snapshot.data!;
+              data = snapshot.data!;
               return SizedBox(
                 width: EsaySize.width(context),
                 height: EsaySize.height(context),
@@ -225,7 +237,6 @@ class _ContentPageState extends State<ContentPage> {
       foregroundColor: Colors.white,
       activeBackgroundColor: Colors.red,
       activeForegroundColor: Colors.white,
-      closeDialOnPop: true,
       visible: true,
       // gradient: CustomGr.gradient(context),
       spacing: 0,
@@ -247,16 +258,44 @@ class _ContentPageState extends State<ContentPage> {
         ),
         SpeedDialChild(
           backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
-          child: Transform.scale(
-              scale: 1,
-              child: const Icon(
-                FontAwesomeIcons.star,
-                size: 20,
-              )),
+          child: StatefulBuilder(builder: (context, setState) {
+            return GestureDetector(
+              onTap: () async {
+                DBhelper dBhelper = DBhelper();
+                var controllerFavorite = Get.put(FavoriteContrller());
+                setState(
+                  () {
+                    dBhelper.deleteArticle(id: widget.id);
+                    iconFavorite = !iconFavorite;
+                    if (!iconFavorite) {
+                      box.remove("Favorite${widget.id}");
+                    } else {
+                      dBhelper.insertArticle(
+                        title: data[0]["title"],
+                        id: widget.id,
+                        groupId: data[0]["groupId"],
+                      );
+                      box.write("Favorite${widget.id}", true);
+                    }
+                  },
+                );
+
+                controllerFavorite.updateList();
+              },
+              child: Transform.scale(
+                  scale: 1,
+                  child: Icon(
+                    iconFavorite ? Icons.star : FontAwesomeIcons.star,
+                    size: 20,
+                  )),
+            );
+          }),
           labelBackgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
           label: 'ذخیره',
           labelStyle: const TextStyle(fontSize: 18.0),
-          onTap: () {},
+          onTap: () {
+            print("sad");
+          },
         ),
         SpeedDialChild(
           backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,

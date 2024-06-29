@@ -1,5 +1,4 @@
 import 'package:adabeharam/Core/database/db_helper.dart';
-import 'package:adabeharam/Core/utils/esay_size.dart';
 import 'package:adabeharam/Core/utils/gr.dart';
 import 'package:adabeharam/Core/widget/appbar.dart';
 import 'package:adabeharam/Features/Content/presentation/content.dart';
@@ -23,10 +22,8 @@ class LastPage extends StatelessWidget {
           context,
           commonController,
         ),
-        body: Container(
-          width: EsaySize.width(context),
-          height: EsaySize.height(context),
-          decoration: BoxDecoration(gradient: CustomGradient.gr(context)),
+        body: CustomGradient.containerGradient(
+          context: context,
           child: SingleChildScrollView(
             child: FutureBuilder<List<Map<String, dynamic>>>(
               future: DBhelper().getArticle(id),

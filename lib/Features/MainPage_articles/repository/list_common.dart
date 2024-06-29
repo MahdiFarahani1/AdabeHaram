@@ -1,11 +1,9 @@
 import 'package:adabeharam/Core/database/db_helper.dart';
-import 'package:adabeharam/Core/utils/esay_size.dart';
 import 'package:adabeharam/Core/utils/gr.dart';
 import 'package:adabeharam/Features/MainPage_articles/presentation/screens/last_page.dart';
 import 'package:adabeharam/Features/MainPage_articles/repository/listview.dart';
 import 'package:adabeharam/Features/MainPage_articles/repository/title_appbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class FutureCommon {
@@ -14,10 +12,8 @@ class FutureCommon {
     required Function(int futureID) pageBuilder,
     required BuildContext context,
   }) {
-    return Container(
-      width: EsaySize.width(context),
-      height: EsaySize.height(context),
-      decoration: BoxDecoration(gradient: CustomGradient.gr(context)),
+    return CustomGradient.containerGradient(
+      context: context,
       child: SingleChildScrollView(
         child: FutureBuilder<List<Map<String, dynamic>>>(
           future: DBhelper().getArticlesAndGroups(id),

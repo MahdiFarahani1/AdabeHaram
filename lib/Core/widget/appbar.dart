@@ -75,4 +75,18 @@ class CustomAppbar {
       ],
     );
   }
+
+  static Widget littleAppbar(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 4),
+      width: EsaySize.width(context),
+      height: 50,
+      child: CardIcon.widget(
+        iconData: FontAwesomeIcons.house,
+        onPress: () {
+          Get.toNamed(Home.rn);
+        },
+      ),
+    );
+  }
 }

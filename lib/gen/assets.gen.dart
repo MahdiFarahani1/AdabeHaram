@@ -22,6 +22,10 @@ class $AssetsDatabaseGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/app_icon.png
+  AssetGenImage get appIcon =>
+      const AssetGenImage('assets/images/app_icon.png');
+
   /// File path: assets/images/div.png
   AssetGenImage get div => const AssetGenImage('assets/images/div.png');
 
@@ -32,7 +36,7 @@ class $AssetsImagesGen {
   AssetGenImage get m => const AssetGenImage('assets/images/m.jpg');
 
   /// List of all assets
-  List<AssetGenImage> get values => [div, kh, m];
+  List<AssetGenImage> get values => [appIcon, div, kh, m];
 }
 
 class Assets {

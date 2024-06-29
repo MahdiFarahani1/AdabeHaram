@@ -73,7 +73,14 @@ class DBhelper {
     return db.query('articles', where: 'groupId = ?', whereArgs: [id]);
   }
 
-  Future<List<Map<String, dynamic>>> getPrayers(int id) async {
+  Future<List<Map<String, dynamic>>> getContentSearch(int id) async {
+    Database db = await initDb();
+    return db.query('articles', where: 'id = ?', whereArgs: [id]);
+  }
+
+  Future<List<Map<String, dynamic>>> getPrayers(
+    int id,
+  ) async {
     Database db = await initDb();
     return db.query('duas_ziarat', where: 'groupId = ?', whereArgs: [id]);
   }
@@ -83,10 +90,29 @@ class DBhelper {
     return db.query('duas_ziarat', where: 'id = ?', whereArgs: [id]);
   }
 
-  Future<List<Map<String, dynamic>>> getSearch(String query) async {
+  Future<List<Map<String, dynamic>>> getSearch(String textSearch,
+      {required SearchEnum searchEnum}) async {
     Database db = await initDb();
-    return db.rawQuery("SELECT * FROM articles WHERE _text LIKE '%$query%'");
-    // return db.query('articles', where: 'title LIKE ?', whereArgs: ['%$query%']);
+    String query = "SELECT * FROM articles WHERE _text LIKE '%$textSearch%'";
+    switch (searchEnum) {
+      case SearchEnum.title:
+        query = "SELECT * FROM articles WHERE _text LIKE '%$textSearch%'";
+
+        break;
+      case SearchEnum.content:
+        query = "SELECT * FROM articles WHERE title LIKE '%$textSearch%'";
+
+      case SearchEnum.both:
+        query =
+            "SELECT * FROM articles WHERE title LIKE '%$textSearch%' OR _text LIKE '%$textSearch%'";
+      default:
+    }
+    return db.rawQuery(query);
+  }
+
+  Future<List<Map<String, dynamic>>> getContentAllsave(int id) async {
+    Database db = await initDb();
+    return db.query('articles', where: 'id = ?', whereArgs: [id]);
   }
 
   Future<List<Map<String, dynamic>>> getAllsave() async {
@@ -96,8 +122,11 @@ class DBhelper {
     );
   }
 
-  insertArticle(
-      {required String title, required int id, required int groupId}) async {
+  insertArticle({
+    required String title,
+    required int id,
+    required int groupId,
+  }) async {
     Database db = await initDb();
     db.insert("bookmark", {
       "id": id,
@@ -113,3 +142,5 @@ class DBhelper {
     db.delete("bookmark", where: "id = ?", whereArgs: [id]);
   }
 }
+
+enum SearchEnum { title, content, both }

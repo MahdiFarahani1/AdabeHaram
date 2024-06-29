@@ -2,11 +2,19 @@ import 'package:adabeharam/Config/routes/app_route.dart';
 import 'package:adabeharam/Features/Home/presentation/wraperHome.dart';
 import 'package:adabeharam/gen/fonts.gen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  await GetStorage.init();
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]).then((_) {
+    runApp(const MyApp());
+  });
 }
 
 final ZoomDrawerController commonController = ZoomDrawerController();
