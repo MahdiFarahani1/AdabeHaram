@@ -10,6 +10,12 @@
 class FontFamily {
   FontFamily._();
 
+  /// Font family: Far
+  static const String far = 'Far';
+
   /// Font family: arabic
   static const String arabic = 'arabic';
+
+  /// Font family: mitra
+  static const String mitra = 'mitra';
 }

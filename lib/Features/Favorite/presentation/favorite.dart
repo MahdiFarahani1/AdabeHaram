@@ -1,9 +1,13 @@
 import 'package:adabeharam/Core/database/db_helper.dart';
+import 'package:adabeharam/Core/utils/esay_size.dart';
+import 'package:adabeharam/Core/utils/gr.dart';
 import 'package:adabeharam/Core/widget/appbar.dart';
 import 'package:adabeharam/Features/Content/presentation/content.dart';
 import 'package:adabeharam/Features/Favorite/presentation/getx/Favorite_controller.dart';
 import 'package:adabeharam/Features/MainPage_articles/repository/title_appbar.dart';
+import 'package:adabeharam/gen/fonts.gen.dart';
 import 'package:adabeharam/main.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -28,7 +32,34 @@ class Favorite extends StatelessWidget {
             } else if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return const Center(child: Text('No Data Found'));
+              return Center(
+                child: Container(
+                  margin: const EdgeInsets.all(8),
+                  alignment: Alignment.center,
+                  width: EsaySize.width(context),
+                  height: 50,
+                  decoration: BoxDecoration(
+                      gradient: CustomGradient.gr(context),
+                      borderRadius: BorderRadius.circular(8)),
+                  child: Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: DefaultTextStyle(
+                      style: const TextStyle(
+                          fontSize: 20.0, fontFamily: FontFamily.arabic),
+                      child: AnimatedTextKit(
+                        isRepeatingAnimation: true,
+                        repeatForever: true,
+                        pause: const Duration(milliseconds: 1500),
+                        animatedTexts: [
+                          TypewriterAnimatedText(
+                            'لم يتم العثور على نتيجة',
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              );
             } else {
               return SizedBox(
                 width: MediaQuery.of(context).size.width,

@@ -1,9 +1,19 @@
 import 'package:adabeharam/Core/utils/esay_size.dart';
 import 'package:adabeharam/Core/utils/gr.dart';
+import 'package:adabeharam/Features/About_Us/presentation/setting.dart';
+import 'package:adabeharam/Features/Favorite/presentation/favorite.dart';
+import 'package:adabeharam/Features/Home/presentation/Home.dart';
+import 'package:adabeharam/Features/Home/presentation/image_viewer.dart';
+import 'package:adabeharam/Features/MainPage_articles/presentation/screens/articles/article_list2.dart';
+import 'package:adabeharam/Features/MainPage_articles/presentation/screens/last_page.dart';
+import 'package:adabeharam/Features/MainPage_articles/repository/title_appbar.dart';
+import 'package:adabeharam/Features/Prayers/presentation/prayer_id1.dart';
+import 'package:adabeharam/Features/Settings/presentation/setting.dart';
 import 'package:adabeharam/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
 
 class CustomDrawer extends StatelessWidget {
   final ZoomDrawerController controller = ZoomDrawerController();
@@ -12,6 +22,7 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.tertiary,
       body: Container(
         width: EsaySize.width(context) * 0.6,
         height: EsaySize.height(context),
@@ -21,13 +32,13 @@ class CustomDrawer extends StatelessWidget {
                 topLeft: Radius.circular(16), bottomLeft: Radius.circular(16))),
         child: Directionality(
           textDirection: TextDirection.rtl,
-          child: Center(
+          child: SingleChildScrollView(
               child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 60),
-                child: Assets.images.appIcon.image(
+                child: Assets.images.header.image(
                   height: 140,
                   width: EsaySize.width(context) * 0.6,
                   fit: BoxFit.cover,
@@ -41,177 +52,165 @@ class CustomDrawer extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: ElevatedButton(
-                    style: buttonStyle(),
-                    onPressed: () {},
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.home),
-                        Spacer(),
-                        Text("item 1"),
-                        Spacer(),
-                      ],
-                    )),
+                  style: buttonStyle(),
+                  onPressed: () {
+                    Get.toNamed(Home.rn);
+                  },
+                  child: const Center(
+                    child: Text("الصفحة الرئيسية"),
+                  ),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      Get.toNamed('${LastPage.rn}?id=1');
+
+                      NameCat.nameCategory = "آداب السفر";
+                    },
                     style: buttonStyle(),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.home),
-                        Spacer(),
-                        Text("item 1"),
-                        Spacer(),
-                      ],
+                    child: const Center(
+                      child: Text("آداب السفر"),
                     )),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: ElevatedButton(
                     style: buttonStyle(),
-                    onPressed: () {},
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.home),
-                        Spacer(),
-                        Text("item 1"),
-                        Spacer(),
-                      ],
+                    onPressed: () {
+                      Get.toNamed('${ArticleList2.rn}?id=2');
+
+                      NameCat.nameCategory = "المدينة المنوره";
+                    },
+                    child: const Center(
+                      child: Text("المدينة المنوره"),
                     )),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: ElevatedButton(
                     style: buttonStyle(),
-                    onPressed: () {},
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.home),
-                        Spacer(),
-                        Text("item 1"),
-                        Spacer(),
-                      ],
+                    onPressed: () {
+                      Get.toNamed('${ArticleList2.rn}?id=67');
+
+                      NameCat.nameCategory = "مكة المكرمة";
+                    },
+                    child: const Center(
+                      child: Text("مكة المكرمة"),
                     )),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: ElevatedButton(
                     style: buttonStyle(),
-                    onPressed: () {},
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.home),
-                        Spacer(),
-                        Text("item 1"),
-                        Spacer(),
-                      ],
+                    onPressed: () {
+                      NameCat.nameCategory = "الأدعية والزيارات";
+
+                      Get.toNamed('${PrayerId1.rn}?id=1');
+                    },
+                    child: const Center(
+                      child: Text("الأدعية والزيارات"),
                     )),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      NameCat.nameCategory = "أدعية الطواف";
+
+                      Get.toNamed('${PrayerId1.rn}?id=2');
+                    },
                     style: buttonStyle(),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.home),
-                        Spacer(),
-                        Text("item 1"),
-                        Spacer(),
-                      ],
+                    child: const Center(
+                      child: Text("أدعية الطواف"),
                     )),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: ElevatedButton(
                     style: buttonStyle(),
-                    onPressed: () {},
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.home),
-                        Spacer(),
-                        Text("item 1"),
-                        Spacer(),
-                      ],
+                    onPressed: () {
+                      NameCat.nameCategory = "معالم مكة";
+
+                      Get.toNamed(ImageViewer.rn,
+                          parameters: {'isKharet': 'true'});
+                    },
+                    child: const Center(
+                      child: Text("معالم مكة"),
                     )),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: ElevatedButton(
                     style: buttonStyle(),
-                    onPressed: () {},
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.home),
-                        Spacer(),
-                        Text("item 1"),
-                        Spacer(),
-                      ],
+                    onPressed: () {
+                      NameCat.nameCategory = "خارطة البقيع";
+
+                      Get.toNamed(ImageViewer.rn,
+                          parameters: {'isKharet': 'false'});
+                    },
+                    child: const Center(
+                      child: Text("خارطة البقيع"),
                     )),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: ElevatedButton(
                     style: buttonStyle(),
-                    onPressed: () {},
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.home),
-                        Spacer(),
-                        Text("item 1"),
-                        Spacer(),
-                      ],
+                    onPressed: () {
+                      NameCat.nameCategory = "المفضلة";
+                      Get.toNamed(Favorite.rn);
+                    },
+                    child: const Center(
+                      child: Text("المفضلة"),
                     )),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: ElevatedButton(
                     style: buttonStyle(),
-                    onPressed: () {},
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.home),
-                        Spacer(),
-                        Text("item 1"),
-                        Spacer(),
-                      ],
+                    onPressed: () {
+                      NameCat.nameCategory = "حول التطبیق";
+
+                      Get.toNamed(AboutUs.rn);
+                    },
+                    child: const Center(
+                      child: Text("حول التطبیق"),
                     )),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: ElevatedButton(
                     style: buttonStyle(),
-                    onPressed: () {},
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.home),
-                        Spacer(),
-                        Text("item 1"),
-                        Spacer(),
-                      ],
+                    onPressed: () {
+                      Share.share("url application");
+                    },
+                    child: const Center(
+                      child: Text("مشاركة التطبيق"),
                     )),
               ),
-              const Spacer(),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: ElevatedButton(
+                    style: buttonStyle(),
+                    onPressed: () {
+                      NameCat.nameCategory = "الإعدادات";
+                      Get.toNamed(Settings.rn);
+                    },
+                    child: const Center(
+                      child: Text("الإعدادات"),
+                    )),
+              ),
               Container(
+                margin: const EdgeInsets.only(top: 8),
                 alignment: Alignment.center,
                 width: EsaySize.width(context) * 0.6,
                 height: 25,
                 decoration: BoxDecoration(
                   borderRadius:
                       const BorderRadius.only(bottomLeft: Radius.circular(12)),
-                  color: Colors.green.shade200,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
                 child: Text(
                   "Version Code : 0.0.1",

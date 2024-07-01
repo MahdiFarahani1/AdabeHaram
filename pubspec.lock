@@ -153,6 +153,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.1.4"
+  drop_shadow:
+    dependency: "direct main"
+    description:
+      name: drop_shadow
+      sha256: "1fa552baeb7c6a3c36a7ff77186a2302a7bf53c93914f46328a9c4eb68ec6b08"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.0"
   dropdown_button2:
     dependency: "direct main"
     description:
@@ -222,6 +230,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.5.0"
+  flutter_colorpicker:
+    dependency: "direct main"
+    description:
+      name: flutter_colorpicker
+      sha256: "969de5f6f9e2a570ac660fb7b501551451ea2a1ab9e2097e89475f60e07816ea"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   flutter_file_downloader:
     dependency: "direct main"
     description:

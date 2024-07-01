@@ -136,7 +136,7 @@ List<GetPage<dynamic>>? pages(ZoomDrawerController controller) {
     ),
     GetPage(
       name: Settings.rn,
-      page: () => const Settings(),
+      page: () => Settings(),
       transition: Transition.rightToLeft,
     ),
     GetPage(

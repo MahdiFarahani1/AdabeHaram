@@ -1,47 +1,45 @@
-// import 'package:adabeharam/Core/utils/esay_size.dart';
-// import 'package:adabeharam/Core/utils/gr.dart';
-// import 'package:flutter/material.dart';
+import 'package:adabeharam/Core/utils/esay_size.dart';
+import 'package:adabeharam/Core/utils/gr.dart';
+import 'package:drop_shadow/drop_shadow.dart';
+import 'package:flutter/material.dart';
 
-// class ItemSetting extends StatelessWidget {
-//   final IconData icon;
-//   final Widget child;
-//   const ItemSetting({super.key, required this.icon, required this.child});
+class ItemSetting extends StatelessWidget {
+  final IconData icon;
+  final Widget child;
+  const ItemSetting({super.key, required this.icon, required this.child});
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return SizedBox(
-//       width: EsaySize.width(context),
-//       child: Stack(
-//         children: [
-//           Align(
-//             alignment: Alignment.bottomCenter,
-//             child: ShaderMask(
-//                shaderCallback: (bounds) {
-//                  return 
-//                },
-//               child: Container(
-//                 decoration: BoxDecoration(
-//                     borderRadius: BorderRadius.circular(10),
-//                     gradient: CustomGradient.gr(context),
-//                 ),
-//                 width: EsaySize.width(context),
-//                 child: child,
-//               ),
-//             ),
-//           ),
-//           Align(
-//               alignment: Alignment.topCenter,
-//               child: Padding(
-//                 padding: const EdgeInsets.only(top: 6.5),
-//                 child: CircleAvatar(
-//                     backgroundColor: Colors.white,
-//                     child: Icon(
-//                       icon,
-//                       color: Theme.of(context).primaryColor,
-//                     )),
-//               ))
-//         ],
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: EsaySize.width(context),
+      child: Stack(
+        children: [
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: DropShadow(
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  gradient: CustomGradient.gr(context),
+                ),
+                width: EsaySize.width(context),
+                child: child,
+              ),
+            ),
+          ),
+          Align(
+              alignment: Alignment.topCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 6.5),
+                child: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    child: Icon(
+                      icon,
+                      color: Theme.of(context).primaryColor,
+                    )),
+              ))
+        ],
+      ),
+    );
+  }
+}

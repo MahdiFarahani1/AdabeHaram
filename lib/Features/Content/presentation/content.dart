@@ -5,7 +5,12 @@ import 'package:adabeharam/Core/widget/appbar.dart';
 import 'package:adabeharam/Core/widget/card_icon.dart';
 import 'package:adabeharam/Features/Content/presentation/getx/controller_nav_bar.dart';
 import 'package:adabeharam/Features/Content/repository/format_duration.dart';
+import 'package:adabeharam/Features/Favorite/presentation/favorite.dart';
 import 'package:adabeharam/Features/Favorite/presentation/getx/Favorite_controller.dart';
+import 'package:adabeharam/Features/Home/presentation/Home.dart';
+import 'package:adabeharam/Features/MainPage_articles/repository/title_appbar.dart';
+import 'package:adabeharam/Features/Settings/presentation/getx/setting_controller.dart';
+import 'package:adabeharam/Features/Settings/presentation/setting.dart';
 import 'package:adabeharam/main.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:draggable_fab/draggable_fab.dart';
@@ -13,16 +18,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/get_core.dart';
-import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class ContentPage extends StatefulWidget {
   static const String rn = "/content";
   final int id;
-
-  const ContentPage({super.key, required this.id});
+  final settingController = Get.put(SettingController());
+  ContentPage({super.key, required this.id});
 
   @override
   State<ContentPage> createState() => _ContentPageState();
@@ -88,31 +92,39 @@ class _ContentPageState extends State<ContentPage> {
               return SizedBox(
                 width: EsaySize.width(context),
                 height: EsaySize.height(context),
-                child: WebViewWidget(
-                  controller: controllerWeb
-                    ..loadHtmlString(
-                      '''
-                                  <html>
-                                    <head>
-                                      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-      
-                                      <style>
-                                        body { text-align: justify;
-                                        padding: 10px !important;
-                                           </style>
-      
-      
-                                    </head>
-                                    <body dir ="rtl">
-                                   
-                                      ${data[0]["_text"]}
+                child: Obx(() => WebViewWidget(
+                      controller: controllerWeb
+                        ..loadHtmlString(
+                          '''
+                                                  <html>
+                                                    <head>
+                                                      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
                       
-                     
-                                </body>
-                              </html>
-                            ''',
-                    ),
-                ),
+                                                      <style>
+                                                         @font-face {
+                                                        font-family: 'CustomFont';
+                                                        src: url("C:/Mahdi_Flutter/projects/adabe_haram/AdabeHaram/assets/fonts/Al-Jazeera-Arabic-Regular.ttf") format('truetype');
+                                                      }
+    
+  
+                                                        body { text-align: justify;
+                                                        padding: 10px !important;
+                                                          font-family: 'CustomFont', sans-serif;
+                                                        font-size:${widget.settingController.textFontSize};
+                                                           </style>
+                      
+                      
+                                                    </head>
+                                                    <body dir ="rtl">
+                                                   
+                                                      ${data[0]["_text"]}
+                                      
+                                     
+                                                </body>
+                                              </html>
+                                            ''',
+                        ),
+                    )),
               );
             }
           },
@@ -252,9 +264,11 @@ class _ContentPageState extends State<ContentPage> {
                 Icons.home_outlined,
               )),
           labelBackgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
-          label: 'خانه',
+          label: "الصفحة الرئيسية",
           labelStyle: const TextStyle(fontSize: 18.0),
-          onTap: () {},
+          onTap: () {
+            Get.toNamed(Home.rn);
+          },
         ),
         SpeedDialChild(
           backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
@@ -291,10 +305,11 @@ class _ContentPageState extends State<ContentPage> {
             );
           }),
           labelBackgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
-          label: 'ذخیره',
+          label: 'المفضلة',
           labelStyle: const TextStyle(fontSize: 18.0),
           onTap: () {
-            print("sad");
+            NameCat.nameCategory = "المفضلة";
+            Get.toNamed(Favorite.rn);
           },
         ),
         SpeedDialChild(
@@ -303,21 +318,26 @@ class _ContentPageState extends State<ContentPage> {
             Icons.settings_outlined,
           ),
           labelBackgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
-          label: 'تنظیمات',
+          label: 'الإعدادات',
           labelStyle: const TextStyle(
             fontSize: 18.0,
           ),
-          onTap: () {},
+          onTap: () {
+            NameCat.nameCategory = "الإعدادات";
+            Get.toNamed(Settings.rn);
+          },
         ),
         SpeedDialChild(
           backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
           child: const Icon(
             Icons.share_outlined,
           ),
-          label: 'اشتراک گذاری',
+          label: 'حول التطبيق',
           labelBackgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
           labelStyle: const TextStyle(fontSize: 18.0),
-          onTap: () {},
+          onTap: () {
+            Share.share(data[0]["_text"]);
+          },
         ),
       ],
     );

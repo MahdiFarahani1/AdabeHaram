@@ -22,12 +22,47 @@ class $AssetsDatabaseGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/adab-icon-01.png
+  AssetGenImage get adabIcon01 =>
+      const AssetGenImage('assets/images/adab-icon-01.png');
+
+  /// File path: assets/images/adab-icon-02.png
+  AssetGenImage get adabIcon02 =>
+      const AssetGenImage('assets/images/adab-icon-02.png');
+
+  /// File path: assets/images/adab-icon-03.png
+  AssetGenImage get adabIcon03 =>
+      const AssetGenImage('assets/images/adab-icon-03.png');
+
+  /// File path: assets/images/adab-icon-04.png
+  AssetGenImage get adabIcon04 =>
+      const AssetGenImage('assets/images/adab-icon-04.png');
+
+  /// File path: assets/images/adab-icon-05.png
+  AssetGenImage get adabIcon05 =>
+      const AssetGenImage('assets/images/adab-icon-05.png');
+
+  /// File path: assets/images/adab-icon-06.png
+  AssetGenImage get adabIcon06 =>
+      const AssetGenImage('assets/images/adab-icon-06.png');
+
+  /// File path: assets/images/adab-icon-07.png
+  AssetGenImage get adabIcon07 =>
+      const AssetGenImage('assets/images/adab-icon-07.png');
+
+  /// File path: assets/images/adab-icon-08.png
+  AssetGenImage get adabIcon08 =>
+      const AssetGenImage('assets/images/adab-icon-08.png');
+
   /// File path: assets/images/app_icon.png
   AssetGenImage get appIcon =>
       const AssetGenImage('assets/images/app_icon.png');
 
   /// File path: assets/images/div.png
   AssetGenImage get div => const AssetGenImage('assets/images/div.png');
+
+  /// File path: assets/images/header.jpg
+  AssetGenImage get header => const AssetGenImage('assets/images/header.jpg');
 
   /// File path: assets/images/kh.jpg
   AssetGenImage get kh => const AssetGenImage('assets/images/kh.jpg');
@@ -36,7 +71,21 @@ class $AssetsImagesGen {
   AssetGenImage get m => const AssetGenImage('assets/images/m.jpg');
 
   /// List of all assets
-  List<AssetGenImage> get values => [appIcon, div, kh, m];
+  List<AssetGenImage> get values => [
+        adabIcon01,
+        adabIcon02,
+        adabIcon03,
+        adabIcon04,
+        adabIcon05,
+        adabIcon06,
+        adabIcon07,
+        adabIcon08,
+        appIcon,
+        div,
+        header,
+        kh,
+        m
+      ];
 }
 
 class Assets {

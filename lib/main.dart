@@ -29,26 +29,26 @@ class MyApp extends StatelessWidget {
       initialRoute: WraperHome.rn,
       getPages: pages(commonController),
       theme: ThemeData(
-        scaffoldBackgroundColor: const Color(0xFF81C784),
+        scaffoldBackgroundColor: const Color(0xFFBBDEFB), // Light Blue 100
         useMaterial3: true,
         fontFamily: FontFamily.arabic,
-        colorScheme: const ColorScheme(
+        colorScheme: ColorScheme(
           onBackground: Colors.black,
           background: Color(0xFFFFFFFF), // White
           brightness: Brightness.light,
-          primary: Color(0xFF4CAF50), // Green 500
-          surfaceTint: Color(0xFF388E3C), // Green 700
+          primary: Colors.lightBlue.shade900, // Blue 500
+          surfaceTint: Color(0xFF1976D2), // Blue 700
           onPrimary: Colors.white,
-          primaryContainer: Color(0xFFC8E6C9), // Green 100
-          onPrimaryContainer: Color(0xFF1B5E20), // Green 900
-          secondary: Color(0xFF8BC34A), // Light Green 400
+          primaryContainer: Color(0xFFBBDEFB), // Light Blue 100
+          onPrimaryContainer: Color(0xFF0D47A1), // Blue 900
+          secondary: Color(0xFF64B5F6), // Blue 300
           onSecondary: Colors.white,
-          secondaryContainer: Color(0xFFDCEDC8), // Light Green 200
-          onSecondaryContainer: Color(0xFF33691E), // Light Green 800
-          tertiary: Color(0xFF81C784), // Light Green 300
+          secondaryContainer: Color(0xFFE3F2FD), // Light Blue 50
+          onSecondaryContainer: Color(0xFF01579B), // Blue 800
+          tertiary: Color(0xFF90CAF9), // Light Blue 300
           onTertiary: Colors.white,
-          tertiaryContainer: Color(0xFFE8F5E9), // Light Green 100
-          onTertiaryContainer: Color(0xFF2E7D32), // Green 700
+          tertiaryContainer: Color(0xFFE1F5FE), // Light Blue 50
+          onTertiaryContainer: Color(0xFF0288D1), // Blue 700
           error: Color(0xFFD32F2F), // Red 700
           onError: Colors.white,
           errorContainer: Color(0xFFFFCDD2), // Red 100
@@ -60,15 +60,15 @@ class MyApp extends StatelessWidget {
           outlineVariant: Color(0xFF78909C), // Blue Grey 400
           shadow: Color(0xFF000000), // Black
           scrim: Color(0xFF000000), // Black
-          inverseSurface: Color(0xFF1B5E20), // Green 900
-          inversePrimary: Color(0xFFC8E6C9), // Green 100
+          inverseSurface: Color(0xFF0D47A1), // Blue 900
+          inversePrimary: Color(0xFFBBDEFB), // Light Blue 100
         ),
         appBarTheme: AppBarTheme(
-          backgroundColor: Colors.green.shade300, // Green 500
+          backgroundColor: Colors.blue.shade200, // Light Blue 300
           foregroundColor: Colors.white,
         ),
         buttonTheme: const ButtonThemeData(
-          buttonColor: Color(0xFF4CAF50), // Green 500
+          buttonColor: Color(0xFF2196F3), // Blue 500
           textTheme: ButtonTextTheme.primary,
         ),
       ),

@@ -9,6 +9,7 @@ import 'package:adabeharam/Features/MainPage_articles/repository/title_appbar.da
 import 'package:adabeharam/Features/Prayers/presentation/prayer_id1.dart';
 import 'package:adabeharam/Features/Prayers/presentation/prayer_id2.dart';
 import 'package:adabeharam/Features/Search/presentation/search.dart';
+import 'package:adabeharam/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -29,6 +30,13 @@ class Home extends StatelessWidget {
       "معالم مكة",
       "خارطة البقيع",
       "المفضلة"
+    ];
+    List<String> imageList = [
+      Assets.images.adabIcon03.path,
+      Assets.images.adabIcon05.path,
+      Assets.images.adabIcon04.path,
+      Assets.images.adabIcon08.path,
+      Assets.images.adabIcon06.path,
     ];
 
     // Define the onPress functions for each category
@@ -73,7 +81,7 @@ class Home extends StatelessWidget {
               ),
             ),
             title: const Text(
-              "آداب حرم",
+              "آداب الحرمين",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
@@ -164,10 +172,15 @@ class Home extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
                                       children: [
-                                        const Icon(
-                                          Icons.article,
-                                          size: 50,
-                                        ),
+                                        if (index == 0)
+                                          Assets.images.adabIcon07
+                                              .image(width: 70, height: 70),
+                                        if (index == 1)
+                                          Assets.images.adabIcon02
+                                              .image(width: 70, height: 70),
+                                        if (index == 2)
+                                          Assets.images.adabIcon01
+                                              .image(width: 70, height: 70),
                                         Text(
                                           data[index]["title"],
                                           style: const TextStyle(
@@ -180,6 +193,7 @@ class Home extends StatelessWidget {
                                   );
                                 } else {
                                   int categoryIndex = index - data.length;
+                                  int imageIndex = index - data.length;
                                   button = ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       shape: RoundedRectangleBorder(
@@ -198,9 +212,10 @@ class Home extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
                                       children: [
-                                        const Icon(
-                                          Icons.category,
-                                          size: 50,
+                                        Image.asset(
+                                          imageList[imageIndex],
+                                          width: 70,
+                                          height: 70,
                                         ),
                                         Text(
                                           categotyList[categoryIndex],
