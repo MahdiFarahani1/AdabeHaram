@@ -1,5 +1,5 @@
 import 'package:adabeharam/Config/routes/app_route.dart';
-import 'package:adabeharam/Features/Home/presentation/wraperHome.dart';
+import 'package:adabeharam/Features/Splash/splash.dart';
 import 'package:adabeharam/gen/fonts.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: WraperHome.rn,
+      initialRoute: Splash.rn,
       getPages: pages(commonController),
       theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xFFBBDEFB), // Light Blue 100

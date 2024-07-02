@@ -1,4 +1,4 @@
-import 'package:adabeharam/Features/About_Us/presentation/setting.dart';
+import 'package:adabeharam/Features/About_Us/presentation/about_us.dart';
 import 'package:adabeharam/Features/Content/presentation/content.dart';
 import 'package:adabeharam/Features/Favorite/presentation/favorite.dart';
 import 'package:adabeharam/Features/Home/presentation/Home.dart';
@@ -7,6 +7,7 @@ import 'package:adabeharam/Features/Home/presentation/wraperHome.dart';
 import 'package:adabeharam/Features/Search/presentation/content_search.dart';
 import 'package:adabeharam/Features/Search/presentation/search.dart';
 import 'package:adabeharam/Features/Settings/presentation/setting.dart';
+import 'package:adabeharam/Features/Splash/splash.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
 
@@ -142,6 +143,11 @@ List<GetPage<dynamic>>? pages(ZoomDrawerController controller) {
     GetPage(
       name: AboutUs.rn,
       page: () => const AboutUs(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: Splash.rn,
+      page: () => const Splash(),
       transition: Transition.rightToLeft,
     ),
   ];

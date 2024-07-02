@@ -58,9 +58,6 @@ class $AssetsImagesGen {
   AssetGenImage get appIcon =>
       const AssetGenImage('assets/images/app_icon.png');
 
-  /// File path: assets/images/div.png
-  AssetGenImage get div => const AssetGenImage('assets/images/div.png');
-
   /// File path: assets/images/header.jpg
   AssetGenImage get header => const AssetGenImage('assets/images/header.jpg');
 
@@ -69,6 +66,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/m.jpg
   AssetGenImage get m => const AssetGenImage('assets/images/m.jpg');
+
+  /// File path: assets/images/splash.jpg
+  AssetGenImage get splash => const AssetGenImage('assets/images/splash.jpg');
 
   /// List of all assets
   List<AssetGenImage> get values => [
@@ -81,10 +81,10 @@ class $AssetsImagesGen {
         adabIcon07,
         adabIcon08,
         appIcon,
-        div,
         header,
         kh,
-        m
+        m,
+        splash
       ];
 }
 

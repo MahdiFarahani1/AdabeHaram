@@ -1,4 +1,4 @@
-package com.example.adabeharam
+package com.dijlah.adabalharamin
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -35,7 +35,7 @@ class SearchPage extends StatelessWidget {
                       controllerSearch.searchText(textEditingController);
                     },
                     decoration: InputDecoration(
-                      hintText: 'جستجو کنید...',
+                      hintText: 'البحث...',
                       hintTextDirection: TextDirection.rtl,
                       hintStyle: TextStyle(
                         color: Colors.grey.shade700,
@@ -75,7 +75,7 @@ class SearchPage extends StatelessWidget {
                         child: GetBuilder<MySearchController>(
                           builder: (_) {
                             return CheckboxListTile(
-                              title: const Text("متن"),
+                              title: const Text("النص"),
                               value: controllerSearch.contentBool,
                               onChanged: (value) {
                                 controllerSearch.changeContentBool(value!);
@@ -96,7 +96,7 @@ class SearchPage extends StatelessWidget {
                         child: GetBuilder<MySearchController>(
                           builder: (_) {
                             return CheckboxListTile(
-                              title: const Text("عنوان"),
+                              title: const Text("العنوان"),
                               value: controllerSearch.titleBool,
                               onChanged: (value) {
                                 controllerSearch.changeTitleBool(value!);
@@ -115,7 +115,7 @@ class SearchPage extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Text(
-                      "نتیجه جستجو : ${controllerSearch.resultSearch.length}",
+                      "نتيجة البحث  : ${controllerSearch.resultSearch.length}",
                       textDirection: TextDirection.rtl,
                     ),
                   ),

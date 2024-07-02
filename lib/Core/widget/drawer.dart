@@ -1,6 +1,6 @@
 import 'package:adabeharam/Core/utils/esay_size.dart';
 import 'package:adabeharam/Core/utils/gr.dart';
-import 'package:adabeharam/Features/About_Us/presentation/setting.dart';
+import 'package:adabeharam/Features/About_Us/presentation/about_us.dart';
 import 'package:adabeharam/Features/Favorite/presentation/favorite.dart';
 import 'package:adabeharam/Features/Home/presentation/Home.dart';
 import 'package:adabeharam/Features/Home/presentation/image_viewer.dart';
@@ -43,11 +43,6 @@ class CustomDrawer extends StatelessWidget {
                   width: EsaySize.width(context) * 0.6,
                   fit: BoxFit.cover,
                 ),
-              ),
-              Assets.images.div.image(
-                height: 30,
-                width: EsaySize.width(context) / 2,
-                fit: BoxFit.cover,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -184,7 +179,8 @@ class CustomDrawer extends StatelessWidget {
                 child: ElevatedButton(
                     style: buttonStyle(),
                     onPressed: () {
-                      Share.share("url application");
+                      Share.share(
+                          "https://play.google.com/store/apps/details?id=com.dijlah.adabalharamin");
                     },
                     child: const Center(
                       child: Text("مشاركة التطبيق"),
@@ -202,8 +198,8 @@ class CustomDrawer extends StatelessWidget {
                       child: Text("الإعدادات"),
                     )),
               ),
+              EsaySize.gap(30),
               Container(
-                margin: const EdgeInsets.only(top: 8),
                 alignment: Alignment.center,
                 width: EsaySize.width(context) * 0.6,
                 height: 25,
@@ -213,8 +209,9 @@ class CustomDrawer extends StatelessWidget {
                   color: Theme.of(context).colorScheme.secondary,
                 ),
                 child: Text(
-                  "Version Code : 0.0.1",
-                  style: TextStyle(color: Colors.grey.shade600, fontSize: 10),
+                  "الاصدار: 1.0",
+                  textDirection: TextDirection.rtl,
+                  style: TextStyle(color: Colors.grey.shade600, fontSize: 10.5),
                 ),
               ),
             ],
