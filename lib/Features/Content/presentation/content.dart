@@ -99,18 +99,21 @@ class _ContentPageState extends State<ContentPage> {
                                                   <html>
                                                     <head>
                                                       <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-                      
+                                                      <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Markazi+Text:wght@400..700&family=Readex+Pro:wght@160..700&display=swap" rel="stylesheet">
+                                                      <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Markazi+Text:wght@400..700&family=Readex+Pro:wght@160..700&display=swap" rel="stylesheet">
+
+                                                      <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
                                                       <style>
-                                                         @font-face {
-                                                        font-family: 'CustomFont';
-                                                        src: url("C:/Mahdi_Flutter/projects/adabe_haram/AdabeHaram/assets/fonts/Al-Jazeera-Arabic-Regular.ttf") format('truetype');
-                                                      }
+                                                      
+  
     
   
-                                                        body { text-align: justify;
-                                                        padding: 10px !important;
-                                                          font-family: 'CustomFont', sans-serif;
-                                                        font-size:${widget.settingController.textFontSize};
+                                                         body {
+                                                      text-align: justify;
+                                                      padding: 10px !important;
+                                                      font-family: '${widget.settingController.textFontFamily}', sans-serif;
+                                                      font-size: ${widget.settingController.textFontSize};
+                                                              }
                                                            </style>
                       
                       

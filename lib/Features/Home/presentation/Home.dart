@@ -83,13 +83,10 @@ class Home extends StatelessWidget {
             title: const Text(
               "آداب الحرمين",
               style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                  fontSize: 20,
-                  decoration: TextDecoration.underline,
-                  decorationColor: Colors.white,
-                  decorationThickness: 1.8,
-                  decorationStyle: TextDecorationStyle.dashed),
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+                fontSize: 20,
+              ),
             ),
             actions: [
               Padding(

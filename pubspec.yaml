@@ -63,7 +63,9 @@ dependencies:
   flutter_colorpicker: ^1.1.0
 
   drop_shadow: ^0.1.0
-flutter_widget_from_html: ^0.15.1
+  flutter_widget_from_html: ^0.15.1
+  google_fonts: ^6.2.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -102,20 +104,20 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  fonts:
-    - family: arabic
-      fonts:
-        - asset: assets/fonts/Al-Jazeera-Arabic-Regular.ttf
-        - asset: assets/fonts/Al-Jazeera-Arabic-Bold.ttf
-          weight: 700
-    - family: mitra
-      fonts:
-        - asset: assets/fonts/Mitra.ttf
-        - asset: assets/fonts/MitraBold.ttf
-          weight: 700
-    - family: Far
-      fonts:
-        - asset: assets/fonts/FarYekan.ttf
+  # fonts:
+  #   - family: arabic
+  #     fonts:
+  #       - asset: assets/fonts/Al-Jazeera-Arabic-Regular.ttf
+  #       - asset: assets/fonts/Al-Jazeera-Arabic-Bold.ttf
+  #         weight: 700
+  #   - family: mitra
+  #     fonts:
+  #       - asset: assets/fonts/Mitra.ttf
+  #       - asset: assets/fonts/MitraBold.ttf
+  #         weight: 700
+  #   - family: Far
+  #     fonts:
+  #       - asset: assets/fonts/FarYekan.ttf
 
   #   - family: Trajan Pro
   #     fonts:

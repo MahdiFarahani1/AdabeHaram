@@ -5,10 +5,10 @@ import 'package:adabeharam/Core/widget/appbar.dart';
 import 'package:adabeharam/Features/Content/presentation/content.dart';
 import 'package:adabeharam/Features/Favorite/presentation/getx/Favorite_controller.dart';
 import 'package:adabeharam/Features/MainPage_articles/repository/title_appbar.dart';
-import 'package:adabeharam/gen/fonts.gen.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
 class Favorite extends StatelessWidget {
@@ -46,8 +46,10 @@ class Favorite extends StatelessWidget {
                         child: Directionality(
                           textDirection: TextDirection.rtl,
                           child: DefaultTextStyle(
-                            style: const TextStyle(
-                                fontSize: 20.0, fontFamily: FontFamily.arabic),
+                            style: GoogleFonts.getFont(
+                              "Readex Pro",
+                              fontSize: 15,
+                            ),
                             child: AnimatedTextKit(
                               isRepeatingAnimation: true,
                               repeatForever: true,

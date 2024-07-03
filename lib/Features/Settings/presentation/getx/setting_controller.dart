@@ -1,12 +1,10 @@
-import 'package:adabeharam/gen/fonts.gen.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class SettingController extends GetxController {
   final box = GetStorage();
   RxDouble textFontSize = 15.0.obs;
-  var textFontFamily = FontFamily.arabic.obs;
-
+  RxString textFontFamily = "Readex Pro".obs;
   RxDouble familyValue = 0.0.obs;
 
   @override
@@ -24,14 +22,14 @@ class SettingController extends GetxController {
     familyValue.value = value;
     switch (familyValue.value) {
       case 0:
-        textFontFamily.value = FontFamily.arabic;
+        textFontFamily.value = "Readex Pro";
         break;
       case 1:
-        textFontFamily.value = FontFamily.mitra;
+        textFontFamily.value = "Lalezar";
 
         break;
       case 2:
-        textFontFamily.value = FontFamily.far;
+        textFontFamily.value = "Markazi Text";
         break;
       default:
     }
@@ -50,6 +48,6 @@ class SettingController extends GetxController {
 
     textFontSize.value = box.read('fontSize') ?? 15.0;
 
-    textFontFamily.value = box.read('fontFamily') ?? FontFamily.arabic;
+    textFontFamily.value = box.read('fontFamily') ?? "Readex Pro";
   }
 }
